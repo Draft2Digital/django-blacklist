@@ -12,7 +12,7 @@ from django.shortcuts import render
 from django.conf import settings
 
 from .models import Rule
-
+from .utils import get_ip
 
 logger = logging.getLogger(__name__)
 
@@ -60,7 +60,7 @@ def _filter_client(request, current_time):
     user = request.user
     user_id = user.id
 
-    addr = request.META['REMOTE_ADDR']
+    addr = get_ip(request)
 
     # no logging here, because the event will be logged either by the caller, or by django.request
 
